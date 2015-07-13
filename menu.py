@@ -9,6 +9,7 @@ class Menu:
 
     def __init__(self):
         self.notebook = Notebook()
+        # Map strings to functions
         self.choices = {
             "1": self.show_notes,
             "2": self.search_notes,
@@ -20,24 +21,24 @@ class Menu:
         print("""
         Notebook menu
 
-
         1. Show all Notes
         2. Search Notes
         3. Add Note
         4. Modify Note
         5. Quit
+
         """)
 
     def run(self):
         '''
-        Display the menu and respond to choices
+        Repeatedly display the menu and respond to choices
         Calls functions on the notebook
         :return:
         '''
 
         while True:
             self.display_menu()
-            choice = input("Enter an option")
+            choice = input("Enter an option: ")
             action = self.choices.get(choice)
             if action:
                 action()
@@ -53,6 +54,9 @@ class Menu:
     def search_notes(self):
         filter = input("Search for: ")
         notes = self.notebook.search(filter)
+        # Serves double duty
+        # if notes supplied, displays only filtered notes
+        # if none supplied, displays all notes
         self.show_notes(notes)
 
     def add_note(self):

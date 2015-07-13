@@ -58,10 +58,12 @@ class Notebook:
         :param memo:
         :return:
         '''
-        for note in self.notes:
-            if note.id == note_id:
-                note.memo = memo
-                break
+        note = self._find_note(note_id)
+        if note:
+            note.memo = memo
+            return True
+        return False
+
 
     def modify_tags(self, note_id, tags):
         '''
@@ -91,18 +93,8 @@ class Notebook:
         :return:
         '''
         for note in self.notes:
-            if note.id == note_id:
+            if str(note.id) == str(note_id):
                 return note
         return None
 
-    def modify_memo(self, note_id, memo):
-        '''
-        Find the note with the given id and change its
-        memo to the given value
-
-        :param note_id:
-        :param memo:
-        :return:
-        '''
-        self._find_note(note_id).memo = memo
 
